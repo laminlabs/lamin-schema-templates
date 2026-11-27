@@ -1,0 +1,37 @@
+[project]
+name = "lamin-schema-templates"
+version = "0.1.0"
+description = "Composable schema plans and examples for LaminDB"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "lamindb-core==2.13a1",
+    "lamindb-setup[evolve]==1.29.1",
+    "lamin-cli==1.23.0",
+    "pandas>=2,<4",
+    "pandera[pandas]>=0.24,<1",
+    "pyarrow",
+    "pyyaml>=6",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "ruff>=0.14,<1"]
+
+[tool.uv]
+package = false
+
+# The native schema API is currently available on these public development revisions.
+[tool.uv.sources]
+lamindb-core = { git = "https://github.com/laminlabs/lamindb", rev = "bc2842535577adea0f8f7894250b1f2c2d3a0784" }
+lamindb-setup = { git = "https://github.com/laminlabs/lamindb-setup", rev = "166e67288e39e6a822fa1efa0f85f9256d7bd459" }
+lamin-cli = { git = "https://github.com/laminlabs/lamin-cli", rev = "e421cd7d5b70ec989ed1e7864141e741702a579b" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+line-length = 88
+extend-exclude = [".local"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
